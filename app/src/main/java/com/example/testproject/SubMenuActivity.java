@@ -1,8 +1,9 @@
+// SubMenuActivity.java
 package com.example.testproject;
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
@@ -37,48 +38,16 @@ public class SubMenuActivity extends AppCompatActivity {
         expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                // 그룹 클릭 시 이벤트 처리 (예: 토스트 메시지)
-                Toast.makeText(getApplicationContext(),
-                        "Group Clicked " + listDataHeader.get(groupPosition),
-                        Toast.LENGTH_SHORT).show();
-
                 ImageView groupIndicator = v.findViewById(R.id.openMenu);
+
+                // 회전 애니메이션 적용
                 if (expandableListView.isGroupExpanded(groupPosition)) {
-                    groupIndicator.setRotation(0);
+                    ObjectAnimator.ofFloat(groupIndicator, "rotation", 90f, 0f).setDuration(300).start();
                 } else {
-                    groupIndicator.setRotation(90);
+                    ObjectAnimator.ofFloat(groupIndicator, "rotation", 0f, 90f).setDuration(300).start();
                 }
+
                 return false;
-            }
-        });
-
-        // 그룹 확장 리스너
-        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                // Apply animation only to child items when the group is expanded
-                for (int i = 0; i < expandableListView.getExpandableListAdapter().getChildrenCount(groupPosition); i++) {
-                    View childView = expandableListView.getChildAt(i);
-                    if (childView != null) {
-                        childView.startAnimation(AnimationUtils.loadAnimation(
-                                getApplicationContext(), R.anim.slide_down));
-                    }
-                }
-            }
-        });
-
-        // 그룹 축소 리스너
-        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-                // Optionally, apply animation when the group is collapsed
-                for (int i = 0; i < expandableListView.getExpandableListAdapter().getChildrenCount(groupPosition); i++) {
-                    View childView = expandableListView.getChildAt(i);
-                    if (childView != null) {
-                        childView.startAnimation(AnimationUtils.loadAnimation(
-                                getApplicationContext(), R.anim.slide_down));
-                    }
-                }
             }
         });
 
@@ -120,8 +89,8 @@ public class SubMenuActivity extends AppCompatActivity {
         HisMenu.add("서브메뉴2");
         HisMenu.add("서브메뉴3");
 
-        listDataChild.put(listDataHeader.get(0), LangMenu);
-        listDataChild.put(listDataHeader.get(1), EngMenu);
-        listDataChild.put(listDataHeader.get(2), HisMenu);
+        listDataChild.put(listDataHeader.get(0), LangMenu); // 메인메뉴1의 서브메뉴
+        listDataChild.put(listDataHeader.get(1), EngMenu); // 메인메뉴2의 서브메뉴
+        listDataChild.put(listDataHeader.get(2), HisMenu); // 메인메뉴3의 서브메뉴
     }
 }

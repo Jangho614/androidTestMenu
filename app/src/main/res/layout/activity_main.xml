@@ -13,7 +13,6 @@
         android:divider="@android:color/darker_gray"
         android:groupIndicator="@null"
         android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
-        android:layout_gravity="center"
-        android:layoutAnimation="@anim/layout_animation" />
+        android:layout_gravity="center"/>
 
 </LinearLayout>
