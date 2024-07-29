@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"> <!-- 부모 레이아웃의 gravity를 center로 설정 -->
+
+    <ExpandableListView
+        android:id="@+id/expandableListView"
+        android:layout_width="300dp"
+        android:layout_height="350dp"
+        android:childDivider="@android:color/darker_gray"
+        android:divider="@android:color/darker_gray"
+        android:groupIndicator="@null"
+        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+        android:layout_gravity="center"
+        android:layoutAnimation="@anim/layout_animation" />
+
+</LinearLayout>
